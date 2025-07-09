@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+public class PR10{
+    
+public static void main(String [] args){
+
+   String[] name = new String[10];
+   name[0] = "Денис"; name[1] = "Андрей"; name[2] = "Сергей"; name[3] = "Алексей";
+   name[4] = "Егор"; name[5] = "Олег"; name[6] = "Гена"; name[7] = "Борис";
+   name[8] = "Петр"; name[9] = "Михаил";
+   
+   int[] year = new int[10];
+   year[0] = 1980; year[1] = 2018; year[2] = 2004; year[3] = 1980;
+   year[4] = 2001; year[5] = 2015; year[6] = 2011; year[7] = 2003;
+   year[8] = 1998; year[9] = 2010;
+   
+   int[] month = new int[10];
+   month[0] = 9; month[1] = 5; month[2] = 7; month[3] = 9;
+   month[4] = 1; month[5] = 12; month[6] = 8; month[7] = 10;
+   month[8] = 8; month[9] = 4;
+   
+   int[] day = new int[10];
+   day[0] = 20; day[1] = 4; day[2] = 14; day[3] = 1;
+   day[4] = 21; day[5] = 31; day[6] = 9; day[7] = 4;
+   day[8] = 18; day[9] = 27;
+   
+   String[] chel = new String[10];
+   for (int i = 0; i < chel.length; i++){
+   chel[i] =  year[i] +"\t"+ month[i] +"\t\t"+ day[i] +"\t\t"+ name[i];} 
+ 
+   System.out.println("\t\t\tАнкета\n\nгод\t\tмесяц\tдень\tИмя");
+    for (int i = 0; i < chel.length; i++) {
+        System.out.println(chel[i]);}
+System.out.println("\nСортировка по дате:");
+
+Arrays.sort(chel);
+System.out.printf(Arrays.toString(chel));
+
+}
+}  

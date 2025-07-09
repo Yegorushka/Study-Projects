@@ -1,0 +1,36 @@
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
+ 
+public class pr11 {
+    
+    public static void main(String[] args) {
+        //Начало пары А
+        //Scanner in = new Scanner(System.in);
+        //System.out.println("Введите начало пары А -->");
+        //String s = in.nextLine();
+        LocalTime start = LocalTime.parse("08:30");
+        
+        //Начало пары В
+       //Scanner in = new Scanner(System.in);
+      //System.out.print("Введите начало пары В -->");
+       // String p = in.nextLine();
+        LocalTime end = LocalTime.parse("10:00");
+        
+ 
+      long hours = ChronoUnit.HOURS.between(start, end);
+      long minutes = ChronoUnit.MINUTES.between(start, end);
+      
+      System.out.printf(
+          
+          "C начала пары А(%s:%s) до пары В(%s:%s) прошло\n"
+          + "%s-минут\n"
+          + "или %s-час"
+          + " %s-минут"
+          ,start.getHour(),start.getMinute()
+          ,end.getHour(),end.getMinute()
+          ,hours*60 + minutes % 60,
+          hours,minutes % 60
+          );
+    }
+}

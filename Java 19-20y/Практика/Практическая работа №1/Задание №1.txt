@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Task3 {
+
+public static void main(String[] args) {
+// Я прировнял колличество компьютеров к количеству мат.плат
+    
+    Scanner in = new Scanner(System.in);
+    
+        System.out.println("Колличество мониторов - ");
+            int kolvo_mon = in.nextInt();
+    int cena_mon = 300;
+
+        System.out.println("Колличество мат.плат - ");
+            int kolvo_mat = in.nextInt();
+    int cena_mat = 150;
+    
+        System.out.println("Колличество ЖД - ");
+            int kolvo_jd = in.nextInt();
+    int cena_jd = 50;
+    
+        System.out.println("Колличество ОЗУ - ");
+            int kolvo_ozu = in.nextInt();
+    int cena_ozu = 100;
+    
+        System.out.println("Колличество ЦП - ");
+            int kolvo_cp = in.nextInt();
+    int cena_cp = 250;
+    
+        System.out.println("Колличество клавиатур - ");
+            int kolvo_klava = in.nextInt();
+    int cena_klava = 90;
+    
+        System.out.println("Колличество мышек - ");
+            int kolvo_mysh = in.nextInt();
+    int cena_mysh = 30;
+
+    int summa1k = cena_mon + cena_mat + cena_jd + cena_ozu + cena_cp + cena_klava + cena_mysh;
+    System.out.println("Стоимость одного компьютера - " + summa1k);
+    
+    int summaN = kolvo_mat * (cena_mon + cena_mat + cena_jd + cena_ozu + cena_cp + cena_klava + cena_mysh);
+    System.out.println("Стоимость " + kolvo_mat + " компьютеров равна - " + summaN );
+}
+}

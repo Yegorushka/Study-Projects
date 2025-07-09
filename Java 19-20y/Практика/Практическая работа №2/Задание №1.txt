@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+
+public class Task1 {
+    public static void main(String args[]) {
+ 
+     
+    Scanner in = new Scanner(System.in);
+
+    
+    System.out.println("Введите либо true, либо false -->");
+
+    boolean x = in.nextBoolean();
+
+    System.out.println("Введите либо true, либо false -->");
+
+    boolean y = in.nextBoolean();
+
+
+    if(!(x||y)) {System.out.println("не(Х или Y) - Истина");} else{System.out.println("не(Х или Y) - Ложь");}
+
+    
+    if(!x&&y) {System.out.println("не Х и Y - Истина");} else{System.out.println("не Х и Y - Ложь");}
+
+    
+    if(x&&!y) {System.out.println("X и не Y - Истина");} else{System.out.println("X и не Y - Ложь");}
+
+    }
+
+}

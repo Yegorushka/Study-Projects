@@ -1,0 +1,19 @@
+public class Task2{
+    
+public static void main(String [] args){
+    
+    double[] klass = new double [13];
+    
+    double pi = 3.14;
+    double tmp = 0.01;
+    double min = 10;
+    
+    System.out.print("Массив:\n");
+    for (int i = 0; i < klass.length; i++) {
+    klass[i] = Math.random() * 9.99;
+
+    if ((Math.abs(klass[i]-pi))<min){min = Math.abs(klass[i]-pi); tmp = klass[i];}
+System.out.printf("%s\n",klass[i]);}
+
+System.out.println("\nМаксимально приближенное число массива к числу pi - " + tmp);
+}}

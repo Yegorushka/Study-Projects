@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Task2 {
+    public static void main(String[] args) {
+        
+    Scanner in = new Scanner(System.in);
+    System.out.println("Введите двухзначное число: \n");
+    int n = in.nextInt();
+    
+      int m = n / 10;
+      int c = n % 10;
+      int summa = m + c;
+      int proiz = m * c;
+
+        System.out.println("Число десятков - " + m);
+        System.out.println("Число единиц - " + c);
+        System.out.println("Сумма чисел - " + summa);
+        System.out.println("Произведение чисел - " + proiz);
+
+}
+}

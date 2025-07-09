@@ -1,0 +1,70 @@
+public class MyClass {
+public static void main(String[] args) {
+    int [][] res1 = new int [2][2];
+    int [][] res5 = new int [2][2];
+System.out.println("À");
+int[][] a = new int[2][2];
+        a[0][0] = 1;
+        a[0][1] = 2;
+        a[1][0] = 3;
+        a[1][1] = 4;
+for (int i = 0; i < a.length; i++) {
+    for (int j = 0; j < a[i].length; j++) { 
+        System.out.print(a[i][j] + "\t");}  
+    System.out.println("\n");}
+
+ System.out.println("C");
+int[][] c = new int[2][2];
+c[0][0] = 1;
+c[0][1] = 0;
+c[1][0] = 0;
+c[1][1] = 1;
+for (int i = 0; i < c.length; i++) {
+    for (int j = 0; j < c[i].length; j++)
+    {System.out.print(c[i][j] + "\t");}
+        System.out.println("\n");}
+        
+     System.out.println("B=A*2=");    
+    int n = 2;
+        int[][] b = new int[a.length][c.length];
+            for(int i = 0; i < a.length; i++){
+                for(int j = 0; j < c.length; j++)
+                    {b[i][j] = a[i][j] * n;}}
+                for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+        System.out.print(b[i][j] + "\t");}
+    System.out.println("\n");}
+    
+    System.out.println("(A+B)*C=");
+        for(int i = 0; i < res1.length; i++) {
+            for(int j = 0; j < res1[i].length; j++) {
+                res1[i][j] = a[i][j] + b[i][j];}}
+    int[][] res2 = new int[res1.length][c.length];
+        for(int i = 0; i < res1.length; i++){
+            for(int e = 0; e < c.length; e++){
+                for(int j = 0; j < res1.length; j++){
+                for(int r = 0; r < c.length; r++){
+                    res2[i][j] = res1[i][j] * c[e][r];}}}}
+                    for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+        System.out.print(res2[i][j] + "\t");}
+    System.out.println("\n");}
+    
+    System.out.println("A*C+B*C=");
+    int[][] res3 = new int[a.length][c.length];
+    for(int i = 0; i < a.length; i++){
+            for(int e = 0; e < c.length; e++){
+                for(int j = 0; j < a.length; j++){
+                for(int r = 0; r < c.length; r++){
+                    res3[i][j] = a[i][j] * c[e][r];}}}}
+    int[][] res4 = new int[b.length][c.length];
+    for(int i = 0; i < b.length; i++){
+            for(int e = 0; e < c.length; e++){
+                for(int j = 0; j < b.length; j++){
+                for(int r = 0; r < c.length; r++){
+                    res4[i][j] = b[i][j] * c[e][r];}}}}
+    for(int i = 0; i < res5.length; i++) {
+            for(int j = 0; j < res5[i].length; j++) {
+                res5[i][j] = res3[i][j] + res4[i][j];
+    System.out.print(res2[i][j] + "\t");}
+    System.out.println("\n");}}}

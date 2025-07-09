@@ -1,0 +1,61 @@
+import java.util.Scanner;
+import java.util.Random;
+public class Umnojenie {
+    public static int[][] proizwedenie(int[][] matrix1, int[][] matrix2){
+        int m = matrix1.length;
+        int n = matrix2[0].length;
+        int o = matrix2.length;
+        int[][] res = new int[m][n];
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < o; k++) {
+                    res[i][j] += matrix1[i][k] * matrix2[k][j]; }}}
+                    
+                    for (int i = 0; i < res.length; i++) {
+        for (int j = 0; j < res[0].length; j++) {
+            System.out.format( res[i][j]+"\t");}
+    System.out.println();} 
+        return res;}
+    
+    public static void main(String[] args) {
+       Scanner in = new Scanner(System.in);
+    System.out.print("Колличество столбцов в матрице A --> ");
+    int a2 = in.nextInt();
+    System.out.print("Колличество строк в матрице A --> ");
+    int a1 = in.nextInt();
+    System.out.print("Колличество столбцов в матрице В --> ");
+    int b2 = in.nextInt();
+    System.out.print("Колличество строк в матрице В --> ");
+    int b1 = in.nextInt();
+    System.out.print("\n");
+   
+    if( a2 != b1 ){
+        System.out.println("Такие матрицы нельзя переумножить\nПо определению произведения матриц можно перемножать только такие\n матрицы у которых число столбцов в первой матрице равно числу строк во второй матрице");}
+    else{
+        
+        int[][] mA = new int[a1][a2];
+        Random rnd = new Random();
+        for (int i=0;i < mA.length;i++) {
+            for (int j=0;j < mA[i].length;j++) {
+                mA[i][j]=rnd.nextInt(100) + 1;}}
+                
+        int[][] mB = new int[b1][b2];
+        for (int i=0;i < mB.length;i++) {
+            for (int j=0;j < mB[i].length;j++) {
+                mB[i][j]=rnd.nextInt(100) + 1;}}
+                
+        for (int i = 0; i < mA.length; i++) {
+    for (int j = 0; j < mA[i].length; j++)
+    {System.out.print(mA[i][j] + "\t");}
+        System.out.println("\n");}
+        System.out.println("*\n");
+        for (int i = 0; i < mB.length; i++) {
+    for (int j = 0; j < mB[i].length; j++)
+    {System.out.print(mB[i][j] + "\t");}
+        System.out.println("\n");}
+        
+    System.out.println("=\n");        
+            
+        System.out.println(proizwedenie(mA,mB));
+    }}}

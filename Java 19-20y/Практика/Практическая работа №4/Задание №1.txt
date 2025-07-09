@@ -1,0 +1,19 @@
+public class Task1{
+    
+public static void main(String [] args){
+    
+    int[] klass = new int[42];
+    
+    double a = Math.round(Math.random()* 20 + 10);
+    for (int i = 0; i < klass.length; i++) {
+    klass[i] =((int)Math.round(Math.random()* 28 + 10));}
+    
+    double sum = 0;
+    for (int j = 0; j < klass.length; j++) {
+    sum += klass[j];}
+    
+    if(sum >= 1000){System.out.println("Колличество учеников является четырехзначное число --> " + (long)sum + " учеников");} //Я добавил long для того, чтобы убрать плавающую точку 
+    else{System.out.println("Колличество учеников не является четырехзначным числом - " + (long)sum + " учеников");}
+
+}
+}

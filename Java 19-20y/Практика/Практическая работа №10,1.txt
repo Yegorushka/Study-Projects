@@ -1,0 +1,38 @@
+public class PR10{
+    
+public static void main(String args[]) {
+        
+Object[] names_years_months_days = {
+            "Денис",   1980  , 
+            "Андрей",  2000  ,
+            "Сергей",  2010 ,
+            "Алексей", 2014 ,
+            "Егор",    1999 ,
+            "Олег",    1987 ,
+            "Гена",    2020 ,
+            "Борис",   2014 ,
+            "Петр",    2000 ,
+            "Михаил",  1987,};
+
+        System.out.println("Дано :");
+        for(int i = 0 ; i < names_years_months_days.length;i++){
+            if(i%2 == 0) System.out.print(names_years_months_days[i] + " "); 
+            if(i%2 != 0) System.out.print(names_years_months_days[i] + "\n");}
+
+        for(int i = 0 ; i < names_years_months_days.length;i++){
+            for(int k = i+2; k<names_years_months_days.length;k++){
+                if(names_years_months_days[i] instanceof  Integer && names_years_months_days[k] instanceof  Integer) {
+                    if((int)names_years_months_days[i] < (int)names_years_months_days[k]){
+                        int year = (int)names_years_months_days[i];
+                        String name = (String) names_years_months_days[i-1];
+                        names_years_months_days[i] = names_years_months_days[k];
+                        names_years_months_days[i-1] = names_years_months_days[k-1];
+                        names_years_months_days[k] = year;
+                        names_years_months_days[k-1] = name;}}}}
+                        
+        System.out.println("\nСортировка: ");
+        for(int i = 0 ; i < names_years_months_days.length;i++){
+            if(i%2 == 0) System.out.print(names_years_months_days[i] + " "); 
+            if(i%2 != 0) System.out.print(names_years_months_days[i] + "\n");}
+}
+}

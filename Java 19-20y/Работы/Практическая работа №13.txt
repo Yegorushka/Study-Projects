@@ -1,0 +1,35 @@
+public class Ship {
+    int nomer;
+    String name;
+    double shirota;
+    String s_n_napr;
+    double dolgota;
+    String w_e_napr;
+    
+    public static void main(String[] args) {
+        
+        Ship sever = new Ship();
+            sever.nomer = 30215;
+            sever.name = "Север";
+            sever.shirota =15.128948;
+            sever.s_n_napr ="Юго";
+            sever.dolgota =46.35489;
+            sever.w_e_napr ="Восток";
+
+        Ship avrora = new Ship();
+            avrora.nomer = 47715;
+            avrora.name = "Аврора";
+            avrora.shirota =78.52156;
+            avrora.s_n_napr ="Северо";
+            avrora.dolgota =57.368998;
+            avrora.w_e_napr ="Запад";
+
+        System.out.println("Корабль под названием " + sever.name + ", его порядковый номер - " + sever.nomer);
+        System.out.print("Его координаты: \nШирота - "+ sever.shirota +"\nДолгота - " + sever.dolgota + "\n");
+        System.out.println("Движется в сторону "+ sever.s_n_napr +"-" + sever.w_e_napr + "\n");
+        
+        System.out.println("Корабль под названием " + avrora.name + ", его порядковый номер - " + avrora.nomer);
+        System.out.print("Его координаты: \nШирота - "+ avrora.shirota +"\nДолгота - " + avrora.dolgota + "\n");
+        System.out.print("Движется в сторону "+ avrora.s_n_napr +"-" + avrora.w_e_napr + "\n");
+    }
+}

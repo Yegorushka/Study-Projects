@@ -1,0 +1,27 @@
+public class Task3 {
+    
+public static final String ANSI_RESET = "\u001B[0m";//цвет выводимого результата синий
+public static final String ANSI_BLUE = "\u001B[34m";//цвет выводимого результата синий
+
+    public static void main(String[] args) {
+       
+System.out.println("x = sqrt((2a+sin|3a|)/3.56)");        
+int a = (int) ( Math.random() + 100 );
+    double x1 = 2 * a;
+    double x2 = Math.sin(Math.abs(3*a));
+    double x3 = x1 + x2;
+    double x4 = x3 / 3.56;
+    double x = Math.sqrt(x4);
+        System.out.println(ANSI_RESET + " Ответ x: " + x + "\n" + ANSI_BLUE);//Если у вас не работает подсветка цвета, то просто удалите ANSI_RESET и ANSI_BLUE
+       
+System.out.println("y = sin((3.2+sqrt(1+x))/|5x|)");       
+int b = (int) ( Math.random() * 100 );
+    double y1 = 1 + b;
+    double y2 = Math.sqrt(y1);
+    double y3 = 3.2 + y2;
+    double y4 = Math.abs(5*b);
+    double y5 = y3 / y4;
+    double y = Math.sin(y5);
+        System.out.println(ANSI_RESET + " Ответ y: " + y + ANSI_BLUE);//Если у вас не работает подсветка цвета, то просто удалите ANSI_RESET и ANSI_BLUE
+}
+}

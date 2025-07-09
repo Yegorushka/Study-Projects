@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class sc{
+
+public static void main(String[] args) {
+    
+    Scanner in = new Scanner(System.in);
+    
+        System.out.println("Рост первого человека в мм -->");
+        double rost_mm = in.nextDouble();
+        double che1 = rost_mm /10;
+
+        System.out.println("Рост второго человека в cм -->");
+            double che2 = in.nextDouble();
+    
+        System.out.println("Рост третьего человека в м -->");
+            double rost_m = in.nextDouble();
+             double che3 = rost_m *100;
+             
+        if(che1 == che2 && che2 == che3 ){
+            System.out.println("Все три человека одинакового роста");}
+        else{
+            System.out.println("Все люди разного роста");}
+        
+}
+}

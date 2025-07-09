@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Task2 {
+    
+   public static void main(String[] args) {
+       
+    Scanner in = new Scanner(System.in);
+    System.out.print("Введите предложение, в котором имеются одна буква «с» и одна буква «т» --> ");
+    String str = in.nextLine();
+    
+    //String str = "сто";
+    
+      int indexT = str.indexOf("т"); // Нахождение символа в строке
+      int indexC = str.indexOf("с");
+      
+      if(indexT==-1 || indexC==-1){//я использую -1 так как счет знаков начинается с нуля, а ноль здесь равен -1
+        System.out.print("В слове (" + str + "), нет либо буквы \"с\", либо буквы \"т\"");}
+        else{
+      if(indexT > indexC){
+        System.out.println("Буква \"с\" встречается раньше, чем буква \"т\"");  
+      } else {
+        System.out.println("Буква \"т\" встречается раньше, чем буква \"с\"");}}
+}
+}

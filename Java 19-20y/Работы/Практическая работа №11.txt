@@ -1,0 +1,20 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class MyClass {
+public static void main(String args[]) {
+String t = "23 2+3 2++3 2+++3 345 567";
+
+System.out.println("text : " + t);
+
+String p_t = "\\d\\++\\d";
+Pattern p = Pattern.compile(p_t);
+Matcher m = p.matcher(t);
+
+System.out.println(" " + "doubles : ");
+
+while(m.find()){
+System.out.println(m.group()+" ");
+}
+}
+}

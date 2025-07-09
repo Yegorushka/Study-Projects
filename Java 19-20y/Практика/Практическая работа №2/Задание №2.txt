@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Task2 {
+    public static void main(String[] args) {
+        
+    Scanner in = new Scanner(System.in);
+    System.out.println("¬ведите двухзначное число -->");
+    int n = in.nextInt();
+     System.out.println("¬ведите число а -->");
+    int a = in.nextInt();
+    
+    int des = n / 10;
+    int ed = n % 10;
+    int summa = des + ed;
+    int res1 = summa % 3;
+    int res2 = summa % a;
+    
+    if(res1 == 0) {System.out.println("„исло кратно 3");}
+    else{System.out.println("„исло не кратно 3");}
+    
+    if(res2 == 0) {System.out.println("„исло кратно " + a);}
+    else{System.out.println("„исло не кратно " + a);}
+
+}
+}

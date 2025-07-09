@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class Task1{
+
+   public static void main(String args[]) {
+  
+    Scanner in = new Scanner(System.in);
+    System.out.println("Введите слово которое хотите перевернуть --> ");
+    String f = in.nextLine();
+  
+    StringBuffer s = new StringBuffer(f);//Использую StringBuffer потому что нужен reverse
+    s.reverse();//reverse - меняет порядок всех символов на противоположный
+    System.out.print("Вывод : "+s);
+   }  
+}

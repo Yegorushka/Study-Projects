@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class lab_work_3_cycles{
+    
+    public static void main(String[] args){
+        
+        System.out.println("������� ����� ������������������ ��������� -->\n");
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        
+        int a1 = 1, b1 = 1;
+        System.out.print("���� ����� for --> " + a1+" "+b1 + " "); 
+        for(int i1 = 2; i1 < n; i1++){
+            int sum_fib1 = a1 + b1;
+            a1 = b1;
+            b1 = sum_fib1;
+            System.out.print(sum_fib1 + " ");}
+            
+        System.out.println("\n");
+        
+        int i2 = 2, b2 = 1, a2 =1;
+        System.out.print("���� ����� while  --> " + a2+" "+b2 + " ");
+        while (i2 < n) {
+                int sum_fib2 = a2 + b2;
+                a2 = b2;
+                b2 = sum_fib2;
+                System.out.print(sum_fib2+ " ");
+                i2++;}
+        
+        System.out.println("\n");
+        
+        int i3 = 2, b3 = 1, a3 =1;
+        System.out.print("���� ����� do while --> " + a3+" "+b3 + " ");
+        do {
+            int sum_fib3 = a3 + b3;
+                a3 = b3;
+                b3 = sum_fib3;
+                System.out.print(sum_fib3+ " ");
+                i3++;
+        }while (i3 < n);
+    }
+}

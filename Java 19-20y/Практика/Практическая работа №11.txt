@@ -1,0 +1,24 @@
+import java.util.Date;
+
+public class PR11{ 
+    
+public static void main(String[] args) throws Exception{
+    
+    Date nachalo_goda = new Date();
+    
+    nachalo_goda.setHours(0);
+    nachalo_goda.setMinutes(0);
+    nachalo_goda.setSeconds(0);
+
+    nachalo_goda.setDate(1);      // первое число
+    nachalo_goda.setMonth(0);     // мес€ц €нварь, нумераци€ дл€ мес€цев 0-11
+
+    Date segodnya = new Date();
+    long raznica_v_mls = segodnya.getTime() - nachalo_goda.getTime();
+    long mls_v_denb = 24 * 60 * 60 * 1000;  //сколько миллисекунд в одних сутках
+
+    int raznica_v_dnyah = (int) (raznica_v_mls/mls_v_denb); //количество целых дней
+    System.out.printf("¬ывод:\nсегодн€ - %s\nс 1-01-2020 прошло %s дней ",segodnya , raznica_v_dnyah);
+
+    }
+}

@@ -1,0 +1,21 @@
+import java.io.*;
+
+public class MyClass {
+    public static void main(String args[]) {
+      BufferedReader br = null;
+        try {
+            File file = new File("ex1.txt");
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            String lastline = "";
+            while (line != null) {
+                lastline = line;
+                line = reader.readLine();
+            }
+            System.out.println(line);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+}}}

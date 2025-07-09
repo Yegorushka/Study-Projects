@@ -1,0 +1,14 @@
+import java.io.*;
+public class MyClass {
+    public static void main(String args[]) {
+      String infile = "‘айлом (от англ. file Ч цепочка) называетс€ последовательный набор данных, хран€щийс€ на каком-либо физическом носителе и имеющий собственные им€ и расширение.";
+      try{
+        File file = new file("ex1.txt");
+        if(!file.exists()) 
+          file.createNewFile();
+        PrintWritter pw = new PrintWritter(file);
+        pw.printLine(infile);
+        pw.close();
+      } catch(IOException e){
+        System.out.print("ќшибка:" + e);
+}}}
