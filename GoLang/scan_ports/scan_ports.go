@@ -3,12 +3,34 @@ package main
 import (
     "bufio"
     "fmt"
+    "flag"  // Если воркеры не работают, коменти флаг
     "os"
     "strings"
     "strconv"
     "net"
     "time"
 )
+
+
+func worker(id int, jobs <-chan int, ip string, results chan<- int, timings chan<- time.Duration, timeout time.Duration){
+    for port := range jobs {
+        address := ip + ":" + strconv.Itoa(port)
+
+        start_time := time.Now()
+        conn, err := net.DialTimeout("tcp", address, timeout)
+        elapsed_time := time.Since(start_time)
+
+        timings <- elapsed_time
+
+        if err != nil{
+            results <- 0
+        } else {
+            conn.Close()
+            results <- port
+        }
+    }
+}
+
 
 func main(){
     var arr []string
@@ -21,7 +43,6 @@ func main(){
     }
     defer file.Close()
 
-
     // Сканирует файл по строчно и записует в срез
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
@@ -33,11 +54,10 @@ func main(){
     }
 
 
+    // Деление строки на айпи адрес и порты
     var IPs []string
     var startPorts []int
     var endPorts []int 
-
-    // Деление строки на айпи адрес и порты
     for i, _ := range arr {
         parts := strings.Split(arr[i], " ")
         if len(parts) != 3 {
@@ -57,6 +77,7 @@ func main(){
         }
     }
 
+
     // Задержка в мс
     var num int
     fmt.Print("Введите время задержки в миллисекундах (оптимально 500):")
@@ -67,43 +88,82 @@ func main(){
     }
     timeout := time.Duration(num) * time.Millisecond
 
-    // Канал для результатов
-    var results []chan int
 
-    var timings []time.Duration
+    // Задаем количество горутин
+    // Этот код можно заменить кодом ниже без установки количества воркеров
+    workerCount := flag.Int("workers", 1000, "количество воркеров")
+    flag.Parse()
 
-    for i, _ := range IPs {
-        ch := make(chan int, endPorts[i]-startPorts[i]+1)
-        results = append(results, ch)
+    fmt.Println("Количество горутин:", *workerCount)
 
-        for port := startPorts[i]; port <= endPorts[i]; port++ {
-            go func(p int) {
-                address := IPs[i] + ":" + strconv.Itoa(p)
 
-                start_time := time.Now()
-                conn, err := net.DialTimeout("tcp", address, timeout)
-                elapsed_time := time.Since(start_time)
-                timings = append(timings, elapsed_time)
+    for i, ip := range IPs {
+        jobChan := make(chan int, 100)
+        resultChan := make(chan int, 100)
+        timingChan := make(chan time.Duration, 100)
 
-                if err != nil {
-                    results[i] <- 0
-                    return
-                }
-                conn.Close()
-                results[i] <- p
-            }(port)
+        // Запускаем воркеров
+        for w := 0; w < *workerCount; w++{
+            go worker(w, jobChan, ip, resultChan, timingChan, timeout)
         }
 
-        // Собираем результаты
-        fmt.Println("IP адрес:", IPs[i], "диапозон сканирования:", startPorts[i], "-", endPorts[i])
+        // Кидаем задачи
+        for port := startPorts[i]; port <= endPorts[i]; port++{
+            jobChan <- port
+        }
+        close(jobChan)
+
+        // Считываем результат
+        fmt.Println("IP адрес:", ip, "диапозон сканирования:", startPorts[i], "-", endPorts[i])
         for j := startPorts[i]; j <= endPorts[i]; j++ {
-            port := <-results[i]
+            port := <- resultChan
+            elapsed := <- timingChan
+
             if port != 0 {
-                fmt.Println("Open port:", port, "| Time:", timings[j])
+                fmt.Println("Open port:", port, "| Time:", elapsed)
             }
         }
-        fmt.Println()   
+
     }
+    // Конец 
+
+
+    // // Канал для результатов
+    // var results []chan int
+    // var timings []time.Duration
+    // for i, ip := range IPs {
+    //     ch := make(chan int, endPorts[i]-startPorts[i]+1)
+    //     results = append(results, ch)
+
+    //     for port := startPorts[i]; port <= endPorts[i]; port++ {
+    //         go func(p int) {
+    //             address := ip + ":" + strconv.Itoa(p)
+
+    //             start_time := time.Now()
+    //             conn, err := net.DialTimeout("tcp", address, timeout)
+    //             elapsed_time := time.Since(start_time)
+    //             timings = append(timings, elapsed_time)
+
+    //             if err != nil {
+    //                 results[i] <- 0
+    //                 return
+    //             }
+    //             conn.Close()
+    //             results[i] <- p
+    //         }(port)
+    //     }
+
+
+    //     // Собираем результаты
+    //     fmt.Println("IP адрес:", ip, "диапозон сканирования:", startPorts[i], "-", endPorts[i])
+    //     for j := startPorts[i]; j <= endPorts[i]; j++ {
+    //         port := <-results[i]
+    //         if port != 0 {
+    //             fmt.Println("Open port:", port, "| Time:", timings[j])
+    //         }
+    //     }
+    //     fmt.Println()   
+    // }
 
 }
 
