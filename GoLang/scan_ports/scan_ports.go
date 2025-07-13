@@ -3,13 +3,21 @@ package main
 import (
     "bufio"
     "fmt"
-    "flag"  // Если воркеры не работают, коменти флаг
+    "flag"
     "os"
     "strings"
     "strconv"
     "net"
     "time"
+    "encoding/json"
 )
+
+type PortResult struct {
+    IP      string          `json:"ip"`
+    Port    int             `json:"port"`
+    Elapsed time.Duration   `json:"elapsed_ms"`
+    Open    bool            `json:"open"`
+}
 
 
 func worker(id int, jobs <-chan int, ip string, results chan<- int, timings chan<- time.Duration, timeout time.Duration){
@@ -90,12 +98,12 @@ func main(){
 
 
     // Задаем количество горутин
-    // Этот код можно заменить кодом ниже без установки количества воркеров
     workerCount := flag.Int("workers", 1000, "количество воркеров")
     flag.Parse()
 
     fmt.Println("Количество горутин:", *workerCount)
 
+    var results_json []PortResult
 
     for i, ip := range IPs {
         jobChan := make(chan int, 100)
@@ -121,59 +129,41 @@ func main(){
 
             if port != 0 {
                 fmt.Println("Open port:", port, "| Time:", elapsed)
+
+                result := PortResult{
+                    IP:         ip,
+                    Port:       port,
+                    Elapsed:    elapsed,
+                    Open:       true,
+                }
+
+                results_json = append(results_json, result)
             }
         }
-
     }
-    // Конец 
 
+    f, err := os.Create("result.json")
+    if err != nil {
+        panic(err)
+    }
+    defer f.Close()
 
-    // // Канал для результатов
-    // var results []chan int
-    // var timings []time.Duration
-    // for i, ip := range IPs {
-    //     ch := make(chan int, endPorts[i]-startPorts[i]+1)
-    //     results = append(results, ch)
-
-    //     for port := startPorts[i]; port <= endPorts[i]; port++ {
-    //         go func(p int) {
-    //             address := ip + ":" + strconv.Itoa(p)
-
-    //             start_time := time.Now()
-    //             conn, err := net.DialTimeout("tcp", address, timeout)
-    //             elapsed_time := time.Since(start_time)
-    //             timings = append(timings, elapsed_time)
-
-    //             if err != nil {
-    //                 results[i] <- 0
-    //                 return
-    //             }
-    //             conn.Close()
-    //             results[i] <- p
-    //         }(port)
-    //     }
-
-
-    //     // Собираем результаты
-    //     fmt.Println("IP адрес:", ip, "диапозон сканирования:", startPorts[i], "-", endPorts[i])
-    //     for j := startPorts[i]; j <= endPorts[i]; j++ {
-    //         port := <-results[i]
-    //         if port != 0 {
-    //             fmt.Println("Open port:", port, "| Time:", timings[j])
-    //         }
-    //     }
-    //     fmt.Println()   
-    // }
-
+    encoder := json.NewEncoder(f)
+    encoder.SetIndent("", " ")
+    err = encoder.Encode(results_json)
+    if err != nil {
+        panic(err)
+    }
 }
 
 
-
-// Асинхронный веб-сканер портов
-// Задача:
-// Напиши программу, которая принимает список хостов и диапазон портов,
-// проверяет их доступность параллельно (goroutines), и выдаёт JSON-отчёт.
-// Условия:
-//     Максимальное количество одновременных проверок (воркеров) задаётся параметром.
-//     Время таймаута подключения – настраиваемое.
-//     В отчёте указать статус порта (открыт/закрыт), время отклика.
+/*
+Задача:
+Асинхронный веб-сканер портов
+Напиши программу, которая принимает список хостов и диапазон портов,
+проверяет их доступность параллельно (goroutines), и выдаёт JSON-отчёт.
+Условия:
+    Максимальное количество одновременных проверок (воркеров) задаётся параметром.
+    Время таймаута подключения – настраиваемое.
+    В отчёте указать статус порта (открыт/закрыт), время отклика.
+*/
